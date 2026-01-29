@@ -121,7 +121,7 @@ export default function Home() {
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#about" className="hover:opacity-80">About</a>
-            <a href="#experience" className="hover:opacity-80">Experience</a>
+            <a href="#achievements" className="hover:opacity-80">Achievements</a>
             <a href="#skills" className="hover:opacity-80">Skills</a>
             <a href="#projects" className="hover:opacity-80">Projects</a>
             <a href="#contact" className="hover:opacity-80">Contact</a>
@@ -199,7 +199,7 @@ export default function Home() {
         </p>
       </motion.section>
       {/* Achievements */}
-<motion.section
+  <motion.section
   id="achievements"
   className="mx-auto max-w-5xl px-4 py-16 md:py-24 text-hero dark:text-white"
   initial={{ opacity: 0, y: 24 }}
@@ -228,6 +228,8 @@ export default function Home() {
     </div>
   </div>
 </motion.section>
+     
+       
 
       {/* Skills */}
       <motion.section
