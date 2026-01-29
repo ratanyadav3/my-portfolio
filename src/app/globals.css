@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
+/* CSS variables used for the radial theme transition */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light theme tuned for readability */
+  --bg: 255 255 255; /* white */
+  --fg: 15 23 42; /* slate-900 a tad deeper */
+  --muted: 71 85 105; /* slate-500 */
+  --accent: 37 99 235; /* blue-600 */
+  --accent-contrast: 255 255 255; /* white */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  /* Dark theme: deep navy surface, light slate text, lighter blue accent */
+  --bg: 10 12 20; /* near #0A0C14 */
+  --fg: 226 232 240; /* slate-200 */
+  --accent: 96 165 250; /* blue-400 */
+  --accent-contrast: 10 12 20; /* deep for potential use */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+}
+
+/* Ensure anchors inherit strong text color on light theme */
+a { color: inherit; }
+
+/* Smooth section reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(0.99);
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1), transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Full-page radial theme toggle wipe */
+.theme-wipe {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  background: radial-gradient(1200px 1200px at var(--x) var(--y), rgb(var(--bg)) 0, rgb(var(--bg)) 55%, transparent 55%);
+  opacity: 0;
+  transition: opacity 650ms ease;
+}
+.theme-wipe.active {
+  opacity: 1;
+}
+
+/* Subtle accent glow for headings */
+.heading-glow {
+  text-shadow: 0 0 24px rgba(var(--accent) / 0.35);
+}
+
+/* Utility helpers for stronger light-mode text without touching JSX */
+.text-hero { color: rgb(var(--fg)); }
+.text-muted { color: rgb(var(--muted)); }
+
+/* Better scrolling */
+html {
+  scroll-behavior: smooth;
 }
